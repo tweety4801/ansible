@@ -1,0 +1,82 @@
+---
+- name: Configure Zabbix Server
+  hosts: zabbix
+  vars:
+    ansible_become: yes
+    ansible_become_method: sudo
+    ansible_become_password: vagrant
+
+  tasks:
+    - name: Disable SELinux
+      selinux:
+        state: disabled
+      notify: Restart to Apply Configuration
+
+    - name: Enable Zabbix repo
+      yum:
+        name: "{{ zabbix_repourl }}"
+        state: present
+
+    - name: Install Zabbix Packages
+      yum:
+        name: "{{ zabbix_packages }}"
+
+    - name: Install MariaDB
+      yum:
+        name:
+          - mariadb-server
+    
+    - name: Start and Enable MariaDB Service
+      systemd:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Create Database
+      mysql_db:
+        name: "{{ DBName }}"
+        state: present
+        encoding: utf8
+        collation: utf8_bin
+
+    - name: Create DB_User with GRANT Option
+      mysql_user:
+        name: "{{ DBUser }}"
+        state: present
+        password: "{{ DBPassword }}"
+        priv: 'zabbix.*:ALL,GRANT'
+
+    - name: Check Table Count before Import Zabbix Schema File
+      shell: mysql -u root -ss {{ DBName }} -e "show tables;" | wc -l
+      register: check_tables
+
+    - name: Configure Zabbix DB
+      shell: zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql {{ DBName }} -u root
+      when: check_tables.stdout == "0"
+
+    - name: Configure zabbix_server.conf
+      template:
+        src: templates/zabbix_server.conf.j2
+        dest: /etc/zabbix/zabbix_server.conf
+        owner: root
+        group: zabbix
+
+    - name: Configure httpd conf for Zabbix
+      template:
+        src: templates/httpd_zabbix.conf.j2
+        dest: /etc/httpd/conf.d/zabbix.conf
+
+    - name: Set locale for Japanese Language setting on Zabbix
+      shell: localedef -f UTF-8 -i ja_JP ja_JP
+
+    - name: Restart Zabbix Related Services
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+        enabled: yes
+      with_items: "{{ zabbix_services }}"
+
+  handlers:
+    - name: Restart to Apply Configuration
+      reboot:
+        reboot_timeout: 3600
