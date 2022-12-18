@@ -21,7 +21,7 @@
     commit → save
 
 ### /etc/ansible/ansible.cfgに追加
- [**defaults**]
+ [defaults]
 interpreter_python=/usr/bin/python3
 host_key_checking = False
 
@@ -36,7 +36,7 @@ sudo yum install pip3.6
 
 ### pip3 listのコマンドで警告が出たときの対処法
 （pip3 listの警告）
-DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [**list**] section) to disable this warning.
+DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
 　↓
 【pip3 listで警告でなくすため以下の手順でcommandを打つ】
 which  pip.conf
@@ -45,7 +45,7 @@ touch pip.conf
 sudo 777 pip.conf
 
 vi pip.conf(編集する)
-[**list**]
+[list]
 format=columns
 
 【pip3 listで警告がでなくなる】
