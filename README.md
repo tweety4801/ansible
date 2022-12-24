@@ -70,7 +70,7 @@ ansible-playbook -i hosts vyos_interface.yml実行時に
 pipとsetuptoolsをアップグレードすると解消する  
 　↓　↓  
 ※pipとsetuptoolsをアップグレードのコマンドを打つ  
-sudo python3 -m pip install --upgrade pip    
+sudo python3 -m pip install --upgrade pip  
 sudo python3 -m pip install --upgrade setuptools  
 
 **（参考サイト）  
