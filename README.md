@@ -5,25 +5,25 @@
 
 ## Chapter7の設定の追加や変更について
 
-### VirtualBox上のVyOSをコンソールで操作設定
+### VirtualBox上のVyOSをコンソールでの操作設定
  ID:vyos Password:vyosでログイン
 
- ・show intで初期の設定を確認
+ - show intで初期の設定を確認
 
 　　eth1とeth2が未設定
 
 　　eth2はansibleで自動設定するために未設定にしておく
 
- ・eth1にvagrantfileに記載しているvyosのipアドレスを設定する
+ - eth1にvagrantfileに記載しているvyosのipアドレスを設定する
 
   　configure  
   　　↓  
 　　set interfaces ethernet eth1 address 192.168.100.20  
-　・sshを有効にする（すでにsshが有効になっていた）  
-　　https://zaki-hmkc.hatenablog.com/entry/2021/04/08/100014を参照  
+　- sshを有効にする（すでにsshが有効になっていた）  
+　　[SSHを有効にする](https://zaki-hmkc.hatenablog.com/entry/2021/04/08/100014を参照)  
     set service ssh
 
-  ・ipアドレスの設定やssh有効の設定をした後、設定を有効にする  
+  - ipアドレスの設定やssh有効の設定をした後、設定を有効にする  
     commit → save
 
 
@@ -41,6 +41,10 @@ sudo yum install python3
 sudo yum install pip3  
 sudo yum install pip3.6  
 
+### pip3でparamikoをインストールする
+ pip3.6 install paramiko  
+ pip3 listでparamikoがインストールされているか確認する
+ 
 ### pip3 listのコマンドで警告が出たときの対処法
 
 （pip3 listの警告）  
@@ -73,9 +77,9 @@ pipとsetuptoolsをアップグレードすると解消する
 sudo python3 -m pip install --upgrade pip  
 sudo python3 -m pip install --upgrade setuptools  
 
-**（参考サイト）  
-**【解決済み】コマンド「python setuppy egg_info」がエラーコード1で失敗しました  
-https://jp.easeus.com/data-recovery-solution/  python-setup-py-egg-info-failed-with-error-code-1.html
+（参考サイト）  
+【解決済み】コマンド「python setuppy egg_info」がエラーコード1で失敗しました  
+[「python setuppy egg_info」のエラー解決](https://jp.easeus.com/data-recovery-solution/python-setup-py-egg-info-failed-with-error-code-1.html)
 
 
 
