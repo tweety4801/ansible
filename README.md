@@ -20,7 +20,7 @@
   　　↓  
 　　set interfaces ethernet eth1 address 192.168.100.20  
 　- sshを有効にする（すでにsshが有効になっていた）  
-　　[SSHを有効にする](https://zaki-hmkc.hatenablog.com/entry/2021/04/08/100014を参照)  
+　　[SSHを有効にする（参照URL）](https://zaki-hmkc.hatenablog.com/entry/2021/04/08/100014)  
     set service ssh
 
   - ipアドレスの設定やssh有効の設定をした後、設定を有効にする  
@@ -44,7 +44,7 @@ sudo yum install pip3.6
 ### pip3でparamikoをインストールする
  pip3.6 install paramiko  
  pip3 listでparamikoがインストールされているか確認する
- 
+
 ### pip3 listのコマンドで警告が出たときの対処法
 
 （pip3 listの警告）  
@@ -79,7 +79,7 @@ sudo python3 -m pip install --upgrade setuptools
 
 （参考サイト）  
 【解決済み】コマンド「python setuppy egg_info」がエラーコード1で失敗しました  
-[「python setuppy egg_info」のエラー解決](https://jp.easeus.com/data-recovery-solution/python-setup-py-egg-info-failed-with-error-code-1.html)
+[「python setuppy egg_info」のエラー解決（参照URL）](https://jp.easeus.com/data-recovery-solution/python-setup-py-egg-info-failed-with-error-code-1.html)
 
 
 
