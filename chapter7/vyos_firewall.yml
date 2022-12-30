@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: vyos
   tasks:
     - name: Create firewall rules
       vyos_config:
